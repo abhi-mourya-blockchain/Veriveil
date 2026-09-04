@@ -1,0 +1,69 @@
+{
+  "contractName": "AetherBid",
+  "version": "1.0.0",
+  "targetNetwork": "midnight-preprod",
+  "compiledAt": "2026-09-12T12:03:36.804Z",
+  "circuits": [
+    {
+      "name": "initializeAuction",
+      "publicInputs": [
+        "title",
+        "description",
+        "reservePrice",
+        "biddingDuration",
+        "revealDuration",
+        "currentBlockTime",
+        "creatorPk"
+      ],
+      "privateWitnesses": []
+    },
+    {
+      "name": "submitSealedBid",
+      "publicInputs": [
+        "bidderPk",
+        "commitmentHash",
+        "currentBlockTime"
+      ],
+      "privateWitnesses": []
+    },
+    {
+      "name": "startRevealPhase",
+      "publicInputs": [
+        "currentBlockTime"
+      ],
+      "privateWitnesses": []
+    },
+    {
+      "name": "revealHighestBid",
+      "publicInputs": [
+        "bidderPk",
+        "currentBlockTime"
+      ],
+      "privateWitnesses": [
+        "privateBidWitness (bidAmount, salt, bidderSk)"
+      ],
+      "disclosedOutputs": [
+        "highestBid",
+        "highestBidder"
+      ]
+    },
+    {
+      "name": "finalizeAuction",
+      "publicInputs": [
+        "currentBlockTime"
+      ],
+      "privateWitnesses": []
+    }
+  ],
+  "ledgerStateSchema": {
+    "auctionState": "AuctionState (Uninitialized | BiddingActive | RevealActive | Finalized)",
+    "item": "{ title: String, description: String, reservePrice: Uint64 }",
+    "highestBid": "Uint64",
+    "highestBidder": "Bytes<32>",
+    "totalBidsCount": "Uint64",
+    "biddingEndTime": "Uint64",
+    "revealEndTime": "Uint64",
+    "sellerPk": "Bytes<32>",
+    "registeredBids": "Map<Bytes<32>, BidCommitment>"
+  }
+}

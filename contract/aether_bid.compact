@@ -1,0 +1,160 @@
+// AetherBid - Zero-Knowledge Sealed-Bid Auction Protocol
+// Compact Smart Contract for Midnight Network (Preprod Level-3)
+// 
+// Architecture & Privacy Guarantees:
+// 1. In the Bidding Phase, bidders submit cryptographic commitments (Hash(amount, salt, pk)).
+// 2. The exact bid amounts remain hidden inside client-side witnesses (private state).
+// 3. In the Reveal Phase, bidders invoke `reveal_highest_bid` with their private witness.
+// 4. ZK circuits verify that the revealed bid corresponds to the registered commitment
+//    and is greater than the current highest bid.
+// 5. `disclose()` is selectively called ONLY to update the public ledger's highest bid
+//    and highest bidder identity. Losing bid amounts are never revealed or disclosed on-chain.
+
+language compact;
+
+enum AuctionState {
+    Uninitialized,
+    BiddingActive,
+    RevealActive,
+    Finalized
+}
+
+struct ItemMetadata {
+    title: Opaque<"string">,
+    description: Opaque<"string">,
+    reservePrice: Uint<64>
+}
+
+struct BidCommitment {
+    bidderPk: Bytes<32>,
+    commitmentHash: Bytes<32>,
+    submittedAt: Uint<64>
+}
+
+// Public Ledger State stored on Midnight Network
+export ledger auctionState: AuctionState;
+export ledger item: ItemMetadata;
+export ledger highestBid: Uint<64>;
+export ledger highestBidder: Bytes<32>;
+export ledger totalBidsCount: Uint<64>;
+export ledger biddingEndTime: Uint<64>;
+export ledger revealEndTime: Uint<64>;
+export ledger sellerPk: Bytes<32>;
+
+// Map of bidder public key to their registered sealed commitment
+export ledger registeredBids: Map<Bytes<32>, BidCommitment>;
+
+// Private Witness representation supplied locally by the bidder's wallet
+export witness privateBidWitness(): {
+    bidAmount: Uint<64>,
+    salt: Bytes<32>,
+    bidderSk: Bytes<32>
+};
+
+// Circuit: Initialize Auction
+// Called by auction creator / seller to launch a new sealed-bid auction
+export circuit initializeAuction(
+    title: Opaque<"string">,
+    description: Opaque<"string">,
+    reservePrice: Uint<64>,
+    biddingDuration: Uint<64>,
+    revealDuration: Uint<64>,
+    currentBlockTime: Uint<64>,
+    creatorPk: Bytes<32>
+): [] {
+    assert(auctionState == AuctionState.Uninitialized, "Auction already initialized");
+    assert(reservePrice > 0, "Reserve price must be greater than zero");
+    assert(biddingDuration > 0 && revealDuration > 0, "Durations must be positive");
+
+    item = ItemMetadata {
+        title: title,
+        description: description,
+        reservePrice: reservePrice
+    };
+
+    highestBid = reservePrice;
+    highestBidder = creatorPk;
+    sellerPk = creatorPk;
+    totalBidsCount = 0;
+    biddingEndTime = currentBlockTime + biddingDuration;
+    revealEndTime = biddingEndTime + revealDuration;
+    auctionState = AuctionState.BiddingActive;
+}
+
+// Circuit: Submit Sealed Bid
+// Bidders register an opaque commitment hash without revealing their bid value
+export circuit submitSealedBid(
+    bidderPk: Bytes<32>,
+    commitmentHash: Bytes<32>,
+    currentBlockTime: Uint<64>
+): [] {
+    assert(auctionState == AuctionState.BiddingActive, "Bidding phase is not active");
+    assert(currentBlockTime <= biddingEndTime, "Bidding deadline has passed");
+    assert(commitmentHash != 0x0000000000000000000000000000000000000000000000000000000000000000, "Invalid zero commitment hash");
+
+    // Register bidder's sealed commitment
+    registeredBids.insert(bidderPk, BidCommitment {
+        bidderPk: bidderPk,
+        commitmentHash: commitmentHash,
+        submittedAt: currentBlockTime
+    });
+
+    totalBidsCount = totalBidsCount + 1;
+}
+
+// Circuit: Transition to Reveal Phase
+export circuit startRevealPhase(currentBlockTime: Uint<64>): [] {
+    assert(auctionState == AuctionState.BiddingActive, "Auction not in bidding state");
+    assert(currentBlockTime > biddingEndTime, "Bidding phase has not ended yet");
+    auctionState = AuctionState.RevealActive;
+}
+
+// Circuit: Reveal Highest Bid with Zero-Knowledge Proof
+// Proves in ZK that:
+// 1. Bidder possesses valid witness (bidAmount, salt, bidderSk)
+// 2. Hash(bidAmount, salt, bidderPk) == registered commitment
+// 3. bidAmount > highestBid
+// Selectively discloses only the new highest bid and winning bidder PK.
+export circuit revealHighestBid(
+    bidderPk: Bytes<32>,
+    currentBlockTime: Uint<64>
+): [] {
+    assert(auctionState == AuctionState.RevealActive, "Reveal phase is not active");
+    assert(currentBlockTime <= revealEndTime, "Reveal deadline has expired");
+
+    // Fetch registered commitment from ledger
+    assert(registeredBids.member(bidderPk), "No registered sealed bid found for this public key");
+    let registeredCommitment = registeredBids.lookup(bidderPk);
+
+    // Retrieve private witness from local prover
+    let witness = privateBidWitness();
+
+    // Verify private key matches public key in ZK circuit
+    let derivedPk = persistent_hash<Vector<2, Bytes<32>>>([witness.bidderSk, 0x01]);
+    assert(derivedPk == bidderPk, "Witness private key does not match public key");
+
+    // Verify bid commitment matches registered hash
+    let computedCommitment = persistent_hash<Vector<3, Bytes<32>>>([
+        witness.bidderSk,
+        witness.salt,
+        pad(32, "left", witness.bidAmount as Bytes<8>)
+    ]);
+    assert(computedCommitment == registeredCommitment.commitmentHash, "Computed commitment does not match registered sealed bid");
+
+    // Enforce bid validity: bid must strictly exceed the current highest verified bid
+    assert(witness.bidAmount > highestBid, "Revealed bid is not higher than current verified highest bid");
+
+    // Selectively disclose ONLY the new winning amount and bidder PK to the public ledger
+    let publicWinningBid = disclose(witness.bidAmount);
+    highestBid = publicWinningBid;
+    highestBidder = bidderPk;
+}
+
+// Circuit: Finalize Auction
+// Locks the auction state after reveal phase deadline
+export circuit finalizeAuction(currentBlockTime: Uint<64>): [] {
+    assert(auctionState == AuctionState.RevealActive, "Auction is not in reveal phase");
+    assert(currentBlockTime > revealEndTime, "Reveal phase has not concluded yet");
+
+    auctionState = AuctionState.Finalized;
+}
