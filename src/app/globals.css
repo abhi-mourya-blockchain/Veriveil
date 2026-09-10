@@ -1,0 +1,82 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #030712;
+  --foreground: #fef08a;
+}
+
+body {
+  color: #e2e8f0;
+  background: radial-gradient(circle at 50% 0%, #172b5c 0%, #070d1e 50%, #030712 100%);
+  min-height: 100vh;
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  overflow-x: hidden;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #070d1e;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #a16207;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #eab308;
+}
+
+/* Glassmorphism Styles */
+.glass-panel {
+  background: rgba(11, 20, 45, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(234, 179, 8, 0.2);
+}
+
+.glass-panel-glow {
+  background: rgba(15, 28, 63, 0.75);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(234, 179, 8, 0.35);
+  box-shadow: 0 0 30px -5px rgba(234, 179, 8, 0.15);
+}
+
+.gold-gradient-text {
+  background: linear-gradient(135deg, #fffbeb 0%, #fde047 30%, #eab308 60%, #a16207 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gold-gradient-btn {
+  background: linear-gradient(135deg, #fef08a 0%, #eab308 50%, #ca8a04 100%);
+  color: #0b142d;
+  font-weight: 700;
+  transition: all 0.25s ease;
+}
+
+.gold-gradient-btn:hover {
+  background: linear-gradient(135deg, #ffffff 0%, #facc15 50%, #eab308 100%);
+  box-shadow: 0 0 25px rgba(234, 179, 8, 0.6);
+  transform: translateY(-1px);
+}
+
+.cyber-badge {
+  background: rgba(0, 240, 255, 0.1);
+  border: 1px solid rgba(0, 240, 255, 0.3);
+  color: #00f0ff;
+}
+
+.witness-badge {
+  background: rgba(139, 92, 246, 0.15);
+  border: 1px solid rgba(139, 92, 246, 0.4);
+  color: #c4b5fd;
+}
