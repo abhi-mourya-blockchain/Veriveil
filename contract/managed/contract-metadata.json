@@ -2,7 +2,7 @@
   "contractName": "AetherBid",
   "version": "1.0.0",
   "targetNetwork": "midnight-preprod",
-  "compiledAt": "2026-09-12T12:03:36.804Z",
+  "compiledAt": "2026-09-12T12:07:20.071Z",
   "circuits": [
     {
       "name": "initializeAuction",
