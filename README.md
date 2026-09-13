@@ -3,12 +3,14 @@
 [![Midnight Network](https://img.shields.io/badge/Midnight-Preprod%20Level--3-blue?style=for-the-badge&logo=shield)](https://midnight.network)
 [![Compact](https://img.shields.io/badge/Language-Compact%20v3-gold?style=for-the-badge)](https://docs.midnight.network)
 [![Next.js 14](https://img.shields.io/badge/Frontend-Next.js%2014-000000?style=for-the-badge&logo=next.js)](https://nextjs.org)
+[![Live dApp](https://img.shields.io/badge/Live%20dApp-veriveil.vercel.app-emerald?style=for-the-badge&logo=vercel)](https://veriveil.vercel.app/)
 [![Live Demo Video](https://img.shields.io/badge/Demo%20Video-Watch%20Walkthrough-red?style=for-the-badge&logo=youtube)](https://photos.app.goo.gl/s1RRNzngZfZaw3qy9)
 [![License: Apache 2.0](https://img.shields.io/badge/License-Apache%202.0-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/Apache-2.0)
 
 **AetherBid** is a decentralized, confidential sealed-bid auction protocol natively engineered for the **Midnight Network**. Leveraging Midnight's **Compact** smart contract language and zero-knowledge proving architecture, AetherBid enables high-value, tamper-proof auctions where bid values remain 100% confidential during the bidding window, and non-winning bids are never exposed on-chain.
 
-🎬 **Live Demo & Video Walkthrough:** [https://photos.app.goo.gl/s1RRNzngZfZaw3qy9](https://photos.app.goo.gl/s1RRNzngZfZaw3qy9)
+🌐 **Live Deployed dApp:** [https://veriveil.vercel.app/](https://veriveil.vercel.app/)  
+🎬 **Live Demo Video Walkthrough:** [https://photos.app.goo.gl/s1RRNzngZfZaw3qy9](https://photos.app.goo.gl/s1RRNzngZfZaw3qy9)
 
 ---
 
@@ -16,6 +18,7 @@
 
 | Parameter | Value |
 | :--- | :--- |
+| **Live Production dApp** | [https://veriveil.vercel.app/](https://veriveil.vercel.app/) |
 | **Network** | Midnight Preprod |
 | **Contract Name** | `AetherBid` |
 | **Contract ID (Hex)** | `02008f51a4b98c3e10827ad46c19385bf731980cae25e9821d3f9208a1c893df8162` |
