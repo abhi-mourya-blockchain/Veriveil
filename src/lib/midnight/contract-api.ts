@@ -1,6 +1,9 @@
 import { AuctionState, AetherBidLedgerState, BidCommitment } from '../../../contract/managed';
 import { PrivateBidWitness, computeBidCommitment, generateSubmitBidProof, proveAndVerifyReveal, SealedBidProof } from './crypto-zk';
 
+export const AETHER_BID_CONTRACT_ID = '02008f51a4b98c3e10827ad46c19385bf731980cae25e9821d3f9208a1c893df8162';
+export const AETHER_BID_CONTRACT_ADDRESS = 'mn_contract1qqp90a8uv3kv72xmjw83le09a7xkw93kd72a9q82h3u0x2k9l1e0a9q8c49';
+
 export interface ActivityEvent {
   id: string;
   txHash: string;

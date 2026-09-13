@@ -35,6 +35,18 @@ export const Header: React.FC<HeaderProps> = ({ account, onConnect, onDisconnect
 
         {/* Network Indicator & Wallet Actions */}
         <div className="flex items-center gap-4">
+          {/* Contract ID Pill */}
+          <a
+            href="https://explorer.preprod.midnight.network/contract/02008f51a4b98c3e10827ad46c19385bf731980cae25e9821d3f9208a1c893df8162"
+            target="_blank"
+            rel="noreferrer"
+            className="hidden lg:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-midnight-900/90 hover:bg-midnight-800 border border-gold-500/30 text-xs text-gold-300 font-mono transition-colors shadow-gold-glow"
+            title="View Contract on Midnight Preprod Explorer"
+          >
+            <span className="text-slate-400">Contract:</span>
+            <span>02008f51...8162</span>
+          </a>
+
           {/* Network Pill */}
           <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full bg-midnight-900/80 border border-gold-500/20 text-xs text-slate-300">
             <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
