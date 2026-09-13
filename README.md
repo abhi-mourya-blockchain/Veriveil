@@ -202,6 +202,26 @@ VeriVeil/
 
 ---
 
+## 📸 Visual Verification & CI/CD Pipeline Proofs
+
+### 1. Zero-Knowledge Unit & Integration Tests (Vitest)
+> All 4 critical ZK protocol circuits, witness secrecy, and state transition test cases passing seamlessly:
+
+<p align="center">
+  <img src="image.png" alt="AetherBid Vitest Unit and Integration Tests - 4 Passed" width="100%" />
+</p>
+
+---
+
+### 2. GitHub Actions Automated CI/CD Pipeline
+> Continuous integration workflow compiling Compact contracts, verifying TypeScript types, executing tests, and producing Next.js production builds:
+
+<p align="center">
+  <img src="image-1.png" alt="AetherBid GitHub Actions CI/CD Pipeline Workflow" width="100%" />
+</p>
+
+---
+
 ## 🛡️ License
 Licensed under the Apache License, Version 2.0.
 
