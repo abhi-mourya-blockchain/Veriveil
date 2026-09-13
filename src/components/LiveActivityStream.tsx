@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { ActivityEvent } from '../lib/midnight/contract-api';
 import { Radio, ExternalLink, ShieldCheck, Lock, Award, RefreshCw } from 'lucide-react';
 
@@ -9,6 +9,11 @@ interface LiveActivityStreamProps {
 }
 
 export const LiveActivityStream: React.FC<LiveActivityStreamProps> = ({ events }) => {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
   const getEventBadge = (type: ActivityEvent['type']) => {
     switch (type) {
       case 'SEALED_BID_SUBMITTED':
@@ -86,8 +91,8 @@ export const LiveActivityStream: React.FC<LiveActivityStreamProps> = ({ events }
                   Block #{evt.blockHeight}
                 </span>
                 <span className="text-slate-600 text-xs">•</span>
-                <span className="text-[11px] text-slate-400">
-                  {new Date(evt.timestamp).toLocaleTimeString()}
+                <span className="text-[11px] text-slate-400" suppressHydrationWarning>
+                  {mounted ? new Date(evt.timestamp).toLocaleTimeString() : 'Syncing...'}
                 </span>
               </div>
 

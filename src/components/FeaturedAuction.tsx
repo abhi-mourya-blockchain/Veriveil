@@ -146,17 +146,17 @@ export const FeaturedAuction: React.FC<FeaturedAuctionProps> = ({ ledgerState, o
                 <span>Phase Remaining Time</span>
                 <Timer className="w-4 h-4 text-cyber-cyan" />
               </div>
-              <div className="grid grid-cols-3 gap-2 text-center">
+              <div className="grid grid-cols-3 gap-2 text-center" suppressHydrationWarning>
                 <div className="p-1.5 rounded-lg bg-midnight-950 border border-gold-500/20">
-                  <div className="text-lg font-bold font-mono text-white">{String(timeLeft.hours).padStart(2, '0')}</div>
+                  <div className="text-lg font-bold font-mono text-white" suppressHydrationWarning>{String(timeLeft.hours).padStart(2, '0')}</div>
                   <div className="text-[9px] uppercase tracking-wider text-slate-400">Hours</div>
                 </div>
                 <div className="p-1.5 rounded-lg bg-midnight-950 border border-gold-500/20">
-                  <div className="text-lg font-bold font-mono text-white">{String(timeLeft.minutes).padStart(2, '0')}</div>
+                  <div className="text-lg font-bold font-mono text-white" suppressHydrationWarning>{String(timeLeft.minutes).padStart(2, '0')}</div>
                   <div className="text-[9px] uppercase tracking-wider text-slate-400">Mins</div>
                 </div>
                 <div className="p-1.5 rounded-lg bg-midnight-950 border border-gold-500/20">
-                  <div className="text-lg font-bold font-mono text-gold-400">{String(timeLeft.seconds).padStart(2, '0')}</div>
+                  <div className="text-lg font-bold font-mono text-gold-400" suppressHydrationWarning>{String(timeLeft.seconds).padStart(2, '0')}</div>
                   <div className="text-[9px] uppercase tracking-wider text-slate-400">Secs</div>
                 </div>
               </div>
