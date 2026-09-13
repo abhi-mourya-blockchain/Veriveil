@@ -204,3 +204,12 @@ VeriVeil/
 
 ## 🛡️ License
 Licensed under the Apache License, Version 2.0.
+
+---
+
+## 👨‍💻 Author & Repository
+
+- **Developer:** [abhi-mourya-blockchain](https://github.com/abhi-mourya-blockchain)
+- **Repository:** [https://github.com/abhi-mourya-blockchain/Veriveil](https://github.com/abhi-mourya-blockchain/Veriveil)
+- **Ecosystem:** Midnight Network (IOG / Cardano ZK Protocol)
+
