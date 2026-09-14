@@ -21,32 +21,9 @@ import { Logger } from 'pino';
 import { HDWallet, Roles } from '@midnight-ntwrk/wallet-sdk-hd';
 import { getNetworkId } from '@midnight-ntwrk/midnight-js-network-id';
 import { WalletSeeds } from '@midnight-ntwrk/testkit-js';
-import * as bip39 from 'bip39';
 
 export const getUnshieldedSeed = (seed: string): Uint8Array<ArrayBufferLike> => {
   const trimmed = seed.trim();
-
-  if (trimmed.includes(' ')) {
-    try {
-      if (typeof (WalletSeeds as any).fromMnemonic === 'function') {
-        const s = (WalletSeeds as any).fromMnemonic(trimmed);
-        if (s && s.unshielded) return s.unshielded;
-      }
-    } catch {}
-
-    try {
-      if (bip39.validateMnemonic(trimmed)) {
-        const entropy = bip39.mnemonicToEntropy(trimmed);
-        const hdResult = HDWallet.fromSeed(Buffer.from(entropy, 'hex'));
-        if ((hdResult as any).type === 'seedOk') {
-          const derivation = (hdResult as any).hdWallet.selectAccount(0).selectRole(Roles.NightExternal).deriveKeyAt(0);
-          if (derivation.type !== 'keyOutOfBounds') {
-            return derivation.key;
-          }
-        }
-      }
-    } catch {}
-  }
 
   try {
     const s = WalletSeeds.fromMasterSeed(trimmed);
