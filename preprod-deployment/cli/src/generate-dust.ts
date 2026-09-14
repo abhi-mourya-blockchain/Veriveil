@@ -20,24 +20,50 @@ import { createKeystore, UnshieldedWalletState } from '@midnight-ntwrk/wallet-sd
 import { Logger } from 'pino';
 import { HDWallet, Roles } from '@midnight-ntwrk/wallet-sdk-hd';
 import { getNetworkId } from '@midnight-ntwrk/midnight-js-network-id';
-import * as rx from 'rxjs';
+import { WalletSeeds } from '@midnight-ntwrk/testkit-js';
+import * as bip39 from 'bip39';
 
 export const getUnshieldedSeed = (seed: string): Uint8Array<ArrayBufferLike> => {
-  const seedBuffer = Buffer.from(seed, 'hex');
-  const hdWalletResult = HDWallet.fromSeed(seedBuffer);
+  const trimmed = seed.trim();
 
-  const { hdWallet } = hdWalletResult as {
-    type: 'seedOk';
-    hdWallet: HDWallet;
-  };
+  if (trimmed.includes(' ')) {
+    try {
+      if (typeof (WalletSeeds as any).fromMnemonic === 'function') {
+        const s = (WalletSeeds as any).fromMnemonic(trimmed);
+        if (s && s.unshielded) return s.unshielded;
+      }
+    } catch {}
 
-  const derivationResult = hdWallet.selectAccount(0).selectRole(Roles.NightExternal).deriveKeyAt(0);
-
-  if (derivationResult.type === 'keyOutOfBounds') {
-    throw new Error('Key derivation out of bounds');
+    try {
+      if (bip39.validateMnemonic(trimmed)) {
+        const entropy = bip39.mnemonicToEntropy(trimmed);
+        const hdResult = HDWallet.fromSeed(Buffer.from(entropy, 'hex'));
+        if ((hdResult as any).type === 'seedOk') {
+          const derivation = (hdResult as any).hdWallet.selectAccount(0).selectRole(Roles.NightExternal).deriveKeyAt(0);
+          if (derivation.type !== 'keyOutOfBounds') {
+            return derivation.key;
+          }
+        }
+      }
+    } catch {}
   }
 
-  return derivationResult.key;
+  try {
+    const s = WalletSeeds.fromMasterSeed(trimmed);
+    if (s && s.unshielded) return s.unshielded;
+  } catch {}
+
+  const seedBuffer = Buffer.from(trimmed, 'hex');
+  const hdWalletResult = HDWallet.fromSeed(seedBuffer);
+
+  if ((hdWalletResult as any).type === 'seedOk') {
+    const derivationResult = (hdWalletResult as any).hdWallet.selectAccount(0).selectRole(Roles.NightExternal).deriveKeyAt(0);
+    if (derivationResult.type !== 'keyOutOfBounds') {
+      return derivationResult.key;
+    }
+  }
+
+  throw new Error(`Unable to derive unshielded seed from provided wallet seed`);
 };
 
 export const generateDust = async (
@@ -45,10 +71,11 @@ export const generateDust = async (
   walletSeed: string,
   unshieldedState: UnshieldedWalletState,
   walletFacade: WalletFacade,
+  existingKeystore?: any,
 ) => {
   const dustAddress = await walletFacade.dust.getAddress();
   const networkId = getNetworkId();
-  const unshieldedKeystore = createKeystore(getUnshieldedSeed(walletSeed), networkId);
+  const unshieldedKeystore = existingKeystore ?? createKeystore(getUnshieldedSeed(walletSeed), networkId);
   const utxos = unshieldedState.availableCoins.filter((coin) => !coin.meta.registeredForDustGeneration);
 
   if (utxos.length === 0) {
@@ -61,7 +88,7 @@ export const generateDust = async (
   const recipe = await walletFacade.registerNightUtxosForDustGeneration(
     utxos,
     unshieldedKeystore.getPublicKey(),
-    (payload) => unshieldedKeystore.signData(payload),
+    (payload: Uint8Array) => unshieldedKeystore.signData(payload),
     dustAddress,
   );
   const transaction = await walletFacade.finalizeRecipe(recipe);
@@ -70,3 +97,4 @@ export const generateDust = async (
 
   return txId;
 };
+
