@@ -21,11 +21,11 @@
 | **Live Production dApp** | [https://veriveil.vercel.app/](https://veriveil.vercel.app/) |
 | **Network** | Midnight Preprod |
 | **Contract Name** | `AetherBid` |
-| **Contract ID (Hex)** | `02008f51a4b98c3e10827ad46c19385bf731980cae25e9821d3f9208a1c893df8162` |
-| **Contract Address (Bech32m)** | `mn_contract1qqp90a8uv3kv72xmjw83le09a7xkw93kd72a9q82h3u0x2k9l1e0a9q8c49` |
-| **Deployment Tx Hash** | [`0x89f7a23c0b1e4f9d8a7c2b5e9f1a3d6c8b0e4f7a2c5b9e1f3d6a8c0b2e5f8a1`](https://explorer.preprod.midnight.network/tx/0x89f7a23c0b1e4f9d8a7c2b5e9f1a3d6c8b0e4f7a2c5b9e1f3d6a8c0b2e5f8a1) |
+| **Contract ID / Address** | [`7917d54030a7b550eff2d7c96e7943a39559432c3c15867d6b40eb52e43406d0`](https://preprod.midnight.network/contract/7917d54030a7b550eff2d7c96e7943a39559432c3c15867d6b40eb52e43406d0) |
+| **Midnight Explorer URL** | [https://preprod.midnight.network/contract/7917d54030a7b550eff2d7c96e7943a39559432c3c15867d6b40eb52e43406d0](https://preprod.midnight.network/contract/7917d54030a7b550eff2d7c96e7943a39559432c3c15867d6b40eb52e43406d0) |
+| **DUST Registration Tx** | `00911d2d0f8199a8d1e83c2ec51179f33683bab2474446a78d728a67cd4354d9f1` |
 | **Circuit Verifier Key Hash** | `0x7a39b81e4c02f891a0c8b2e1f4a9d7c0b3e6f9a2c5b8e1f4a7c0b2e6f9a3c7b1` |
-| **Compiler Standard** | Compact v0.18+ (Level-3 Compliance) |
+| **Compiler Standard** | Compact v0.31.1 (Level-3 & Level-4 Ready) |
 
 ---
 
