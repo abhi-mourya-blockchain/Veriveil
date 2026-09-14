@@ -57,7 +57,7 @@ export const RevealTallyPanel: React.FC<RevealTallyPanelProps> = ({
   };
 
   return (
-    <div className="glass-panel rounded-3xl p-6 sm:p-8 border border-gold-500/30">
+    <div className="glass-card-obsidian rounded-3xl p-6 sm:p-8">
       
       {/* Header */}
       <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
@@ -74,15 +74,15 @@ export const RevealTallyPanel: React.FC<RevealTallyPanelProps> = ({
           </p>
         </div>
 
-        <div className="px-3 py-1.5 rounded-xl bg-midnight-900 border border-slate-700/60 text-xs text-slate-300">
-          Current Winner: <strong className="font-mono text-gold-400">{ledgerState.highestBidder.slice(0, 8)}...{ledgerState.highestBidder.slice(-6)}</strong>
+        <div className="px-3 py-1.5 rounded-xl bg-obsidian-950 border border-white/10 text-xs text-slate-300">
+          Current Winner: <strong className="font-mono text-celestial-300">{ledgerState.highestBidder.slice(0, 8)}...{ledgerState.highestBidder.slice(-6)}</strong>
         </div>
       </div>
 
       {/* State Notices */}
       {ledgerState.auctionState === AuctionState.BiddingActive && (
-        <div className="p-4 rounded-2xl bg-midnight-900/60 border border-slate-800 flex items-center gap-3 text-xs text-slate-400 mb-6">
-          <ShieldAlert className="w-4 h-4 text-gold-400 flex-shrink-0" />
+        <div className="p-4 rounded-2xl bg-obsidian-950/80 border border-white/10 flex items-center gap-3 text-xs text-slate-400 mb-6">
+          <ShieldAlert className="w-4 h-4 text-celestial-400 flex-shrink-0" />
           <span>
             Bidding phase is currently active. Witness verification and tallying will be unlocked once the bidding epoch closes.
           </span>
@@ -90,13 +90,13 @@ export const RevealTallyPanel: React.FC<RevealTallyPanelProps> = ({
       )}
 
       {isFinalized && (
-        <div className="p-5 rounded-2xl bg-purple-950/20 border border-purple-500/40 space-y-2 mb-6">
-          <div className="flex items-center gap-2 text-purple-400 text-sm font-semibold">
+        <div className="p-5 rounded-2xl bg-indigo-950/30 border border-indigo-500/40 space-y-2 mb-6">
+          <div className="flex items-center gap-2 text-indigo-400 text-sm font-semibold">
             <Award className="w-5 h-5" />
             <span>Auction Concluded & Finalized</span>
           </div>
           <p className="text-xs text-slate-300">
-            Winning Bid: <strong className="text-gold-400 font-mono">{(Number(ledgerState.highestBid) / 1_000_000).toLocaleString()} tDUST</strong>.
+            Winning Bid: <strong className="text-white font-mono">{(Number(ledgerState.highestBid) / 1_000_000).toLocaleString()} tDUST</strong>.
           </p>
           <p className="text-xs text-slate-400 font-mono truncate">
             Winner PK: {ledgerState.highestBidder}
@@ -137,8 +137,8 @@ export const RevealTallyPanel: React.FC<RevealTallyPanelProps> = ({
           onClick={handleExecuteReveal}
           className={`py-3.5 px-4 rounded-2xl font-bold text-sm flex items-center justify-center gap-2 transition-all ${
             isRevealPhase
-              ? 'gold-gradient-btn shadow-gold-glow'
-              : 'bg-midnight-900 border border-slate-800 text-slate-500 cursor-not-allowed'
+              ? 'btn-white-pill text-obsidian-950 shadow-pill-glow'
+              : 'bg-obsidian-950 border border-white/10 text-slate-500 cursor-not-allowed'
           }`}
         >
           {isRevealing ? (
@@ -159,8 +159,8 @@ export const RevealTallyPanel: React.FC<RevealTallyPanelProps> = ({
           onClick={onFinalize}
           className={`py-3.5 px-4 rounded-2xl font-bold text-sm border flex items-center justify-center gap-2 transition-all ${
             isRevealPhase
-              ? 'bg-midnight-800 hover:bg-midnight-700 text-gold-300 border-gold-500/40'
-              : 'bg-midnight-950 border-slate-800 text-slate-600 cursor-not-allowed'
+              ? 'btn-glass-pill text-white border-celestial-500/40'
+              : 'bg-obsidian-950 border-white/5 text-slate-600 cursor-not-allowed'
           }`}
         >
           <span>Finalize & Lock Auction</span>

@@ -122,14 +122,14 @@ export const ConfidentialBiddingPanel: React.FC<ConfidentialBiddingPanelProps> =
   const isBiddingActive = ledgerState.auctionState === AuctionState.BiddingActive;
 
   return (
-    <div className="glass-panel rounded-3xl p-6 sm:p-8 border border-gold-500/30">
+    <div className="glass-card-obsidian rounded-3xl p-6 sm:p-8">
       
       {/* Header */}
       <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
         <div>
           <div className="flex items-center gap-2">
             <h3 className="text-xl font-bold text-white">Confidential Bidding Panel</h3>
-            <span className="px-2.5 py-0.5 rounded-full text-[10px] font-semibold bg-purple-500/10 text-purple-400 border border-purple-500/30 flex items-center gap-1">
+            <span className="px-2.5 py-0.5 rounded-full text-[10px] font-semibold bg-celestial-500/10 text-celestial-300 border border-celestial-500/30 flex items-center gap-1">
               <Lock className="w-3 h-3" />
               Private Witness
             </span>
@@ -139,8 +139,8 @@ export const ConfidentialBiddingPanel: React.FC<ConfidentialBiddingPanelProps> =
           </p>
         </div>
 
-        <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-midnight-900 border border-slate-700/60 text-xs text-slate-300">
-          <Database className="w-3.5 h-3.5 text-gold-400" />
+        <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-obsidian-950 border border-white/10 text-xs text-slate-300">
+          <Database className="w-3.5 h-3.5 text-celestial-400" />
           <span>Local Witness Storage: <strong className="text-emerald-400">Encrypted</strong></span>
         </div>
       </div>
@@ -153,7 +153,7 @@ export const ConfidentialBiddingPanel: React.FC<ConfidentialBiddingPanelProps> =
             <div>
               <h4 className="text-sm font-semibold text-emerald-300">Active Sealed Bid Registered</h4>
               <p className="text-xs text-slate-300 mt-0.5">
-                Your private bid amount is: <strong className="text-gold-400">{(Number(existingWitness.bidAmount) / 1_000_000).toLocaleString()} tDUST</strong>.
+                Your private bid amount is: <strong className="text-white">{(Number(existingWitness.bidAmount) / 1_000_000).toLocaleString()} tDUST</strong>.
               </p>
               <p className="text-[11px] font-mono text-slate-400 mt-1">
                 Witness Salt: {existingWitness.salt.slice(0, 16)}...
@@ -174,10 +174,10 @@ export const ConfidentialBiddingPanel: React.FC<ConfidentialBiddingPanelProps> =
           <div className="flex justify-between items-center mb-2">
             <label className="text-xs font-semibold uppercase tracking-wider text-slate-300 flex items-center gap-1.5">
               <span>Secret Bid Amount</span>
-              <span className="text-gold-400 font-normal">(tDUST)</span>
+              <span className="text-celestial-400 font-normal">(tDUST)</span>
             </label>
             <span className="text-xs text-slate-400">
-              Min Next Bid: <strong className="text-gold-400">{(Number(ledgerState.highestBid) / 1_000_000 + 1).toLocaleString()} tDUST</strong>
+              Min Next Bid: <strong className="text-celestial-300">{(Number(ledgerState.highestBid) / 1_000_000 + 1).toLocaleString()} tDUST</strong>
             </span>
           </div>
 
@@ -190,10 +190,10 @@ export const ConfidentialBiddingPanel: React.FC<ConfidentialBiddingPanelProps> =
               value={bidAmount}
               onChange={(e) => setBidAmount(e.target.value)}
               placeholder="Enter confidential bid amount..."
-              className="w-full bg-midnight-900 border border-gold-500/30 focus:border-gold-400 rounded-2xl py-3.5 px-4 text-white text-lg font-mono focus:outline-none focus:ring-1 focus:ring-gold-400 transition-all disabled:opacity-50"
+              className="w-full bg-obsidian-950 border border-white/15 focus:border-celestial-400 rounded-2xl py-3.5 px-4 text-white text-lg font-mono focus:outline-none focus:ring-1 focus:ring-celestial-400 transition-all disabled:opacity-50"
             />
             <div className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-2">
-              <span className="px-2.5 py-1 rounded-lg bg-midnight-950 border border-gold-500/20 text-xs font-mono text-gold-400">
+              <span className="px-2.5 py-1 rounded-lg bg-obsidian-900 border border-white/10 text-xs font-mono text-celestial-300">
                 tDUST
               </span>
             </div>
@@ -201,21 +201,21 @@ export const ConfidentialBiddingPanel: React.FC<ConfidentialBiddingPanelProps> =
         </div>
 
         {/* Secret Salt Generator */}
-        <div className="p-4 rounded-2xl bg-midnight-900/60 border border-slate-800 space-y-2">
+        <div className="p-4 rounded-2xl bg-obsidian-950/80 border border-white/10 space-y-2">
           <div className="flex items-center justify-between">
             <label className="text-xs font-medium text-slate-300 flex items-center gap-1.5">
-              <KeyRound className="w-3.5 h-3.5 text-gold-400" />
+              <KeyRound className="w-3.5 h-3.5 text-celestial-400" />
               <span>Cryptographic Salt (Private Witness Entropy)</span>
             </label>
             <button
               type="button"
               onClick={handleRegenerateSalt}
-              className="text-xs text-gold-400 hover:text-gold-300 underline font-mono"
+              className="text-xs text-celestial-400 hover:text-celestial-300 underline font-mono"
             >
               Regenerate
             </button>
           </div>
-          <div className="bg-midnight-950 p-2.5 rounded-xl font-mono text-xs text-slate-400 truncate border border-slate-800/80">
+          <div className="bg-obsidian-900 p-2.5 rounded-xl font-mono text-xs text-slate-400 truncate border border-white/5">
             {salt || 'Generating secure entropy...'}
           </div>
           <p className="text-[11px] text-slate-400">
@@ -229,19 +229,19 @@ export const ConfidentialBiddingPanel: React.FC<ConfidentialBiddingPanelProps> =
             <AlertCircle className="w-4 h-4 flex-shrink-0" />
             <span>Bidding phase has concluded. Proceed to the Reveal & Tally Interface below to prove your winning bid.</span>
           </div>
-        ) : account?.isConnected ? (
+        ) : account ? (
           <button
             type="submit"
-            className="w-full py-4 rounded-2xl gold-gradient-btn text-midnight-950 font-bold tracking-wide shadow-gold-glow-lg flex items-center justify-center gap-2"
+            className="w-full py-4 rounded-2xl btn-white-pill font-bold tracking-wide flex items-center justify-center gap-2 text-obsidian-950 shadow-pill-glow"
           >
-            <Sparkles className="w-5 h-5 text-midnight-950" />
+            <Sparkles className="w-5 h-5 text-obsidian-950" />
             <span>Submit Encrypted Sealed Bid (Generate ZK Proof)</span>
           </button>
         ) : (
           <button
             type="button"
             onClick={onConnectWallet}
-            className="w-full py-4 rounded-2xl gold-gradient-btn text-midnight-950 font-bold tracking-wide shadow-gold-glow flex items-center justify-center gap-2"
+            className="w-full py-4 rounded-2xl btn-white-pill font-bold tracking-wide flex items-center justify-center gap-2 text-obsidian-950 shadow-pill-glow"
           >
             <span>Connect Lace Wallet to Submit Sealed Bid</span>
           </button>

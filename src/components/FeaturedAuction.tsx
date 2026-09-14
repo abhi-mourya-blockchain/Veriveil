@@ -42,7 +42,7 @@ export const FeaturedAuction: React.FC<FeaturedAuctionProps> = ({ ledgerState, o
         );
       case AuctionState.Finalized:
         return (
-          <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/30 text-purple-400 text-xs font-semibold">
+          <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/30 text-indigo-400 text-xs font-semibold">
             <Award className="w-3.5 h-3.5" />
             <span>AUCTION FINALIZED</span>
           </div>
@@ -53,41 +53,41 @@ export const FeaturedAuction: React.FC<FeaturedAuctionProps> = ({ ledgerState, o
   };
 
   return (
-    <div className="glass-panel-glow rounded-3xl p-6 lg:p-8 border border-gold-500/30 relative overflow-hidden">
+    <div className="glass-card-obsidian rounded-3xl p-6 lg:p-8 relative overflow-hidden">
       {/* Background ambient lighting */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-gold-500/10 rounded-full blur-3xl pointer-events-none -mr-20 -mt-20"></div>
-      <div className="absolute bottom-0 left-0 w-80 h-80 bg-cyber-violet/10 rounded-full blur-3xl pointer-events-none -ml-20 -mb-20"></div>
+      <div className="absolute top-0 right-0 w-96 h-96 bg-celestial-500/10 rounded-full blur-3xl pointer-events-none -mr-20 -mt-20"></div>
+      <div className="absolute bottom-0 left-0 w-80 h-80 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none -ml-20 -mb-20"></div>
 
       <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
         
         {/* Luxury Item Showcase */}
         <div className="lg:col-span-5 relative group">
-          <div className="relative rounded-2xl overflow-hidden border border-gold-500/40 shadow-gold-glow aspect-square bg-midnight-900 flex items-center justify-center p-4">
+          <div className="relative rounded-2xl overflow-hidden border border-white/10 shadow-2xl aspect-square bg-obsidian-950 flex items-center justify-center p-4">
             
             {/* Holographic Dial Visual */}
-            <div className="absolute inset-0 bg-gradient-to-tr from-midnight-950 via-midnight-900 to-gold-950/40 opacity-90"></div>
+            <div className="absolute inset-0 bg-gradient-to-tr from-obsidian-950 via-obsidian-900 to-celestial-950/30 opacity-90"></div>
             
             <div className="relative z-10 flex flex-col items-center justify-center text-center p-6">
-              <div className="w-36 h-36 rounded-full border-2 border-dashed border-gold-400/60 p-2 flex items-center justify-center animate-spin-slow">
-                <div className="w-28 h-28 rounded-full bg-gold-metallic p-1 shadow-gold-glow-lg flex items-center justify-center">
-                  <div className="w-full h-full bg-midnight-950 rounded-full flex flex-col items-center justify-center p-2 text-center">
-                    <Sparkles className="w-6 h-6 text-gold-400 mb-1" />
-                    <span className="text-[10px] font-mono text-gold-300 font-bold uppercase">ZK PROOF</span>
+              <div className="w-36 h-36 rounded-full border border-dashed border-celestial-400/40 p-2 flex items-center justify-center animate-spin-slow">
+                <div className="w-28 h-28 rounded-full bg-gradient-to-tr from-celestial-500 via-indigo-600 to-white p-[2px] shadow-blue-glow flex items-center justify-center">
+                  <div className="w-full h-full bg-obsidian-950 rounded-full flex flex-col items-center justify-center p-2 text-center">
+                    <Sparkles className="w-6 h-6 text-celestial-300 mb-1" />
+                    <span className="text-[10px] font-mono text-celestial-300 font-bold uppercase">ZK PROOF</span>
                     <span className="text-[9px] text-slate-400">Midnight Genesis</span>
                   </div>
                 </div>
               </div>
 
               <div className="mt-6">
-                <span className="px-3 py-1 rounded-full text-xs font-mono bg-midnight-800 border border-gold-500/30 text-gold-300">
+                <span className="px-3 py-1 rounded-full text-xs font-mono bg-obsidian-900 border border-white/10 text-celestial-300">
                   Item ID: #MID-ZK-8801
                 </span>
               </div>
             </div>
 
-            <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between px-3 py-2 rounded-xl bg-midnight-950/80 backdrop-blur-md border border-white/10 text-xs">
+            <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between px-3 py-2 rounded-xl bg-obsidian-900/90 backdrop-blur-md border border-white/10 text-xs">
               <span className="text-slate-400 flex items-center gap-1.5">
-                <Lock className="w-3.5 h-3.5 text-gold-400" />
+                <Lock className="w-3.5 h-3.5 text-celestial-400" />
                 Zero-Knowledge Encrypted
               </span>
               <span className="text-emerald-400 font-mono font-medium">Compact V3</span>
@@ -101,8 +101,8 @@ export const FeaturedAuction: React.FC<FeaturedAuctionProps> = ({ ledgerState, o
             <div className="flex flex-wrap items-center justify-between gap-3 mb-3">
               {getStatusBadge()}
               
-              <div className="flex items-center gap-1.5 text-xs text-slate-400 bg-midnight-900/60 px-3 py-1 rounded-full border border-slate-700/50">
-                <Users className="w-3.5 h-3.5 text-gold-400" />
+              <div className="flex items-center gap-1.5 text-xs text-slate-400 bg-obsidian-950/80 px-3 py-1 rounded-full border border-white/10">
+                <Users className="w-3.5 h-3.5 text-celestial-400" />
                 <span>{ledgerState.totalBidsCount.toString()} Confidential Bids</span>
               </div>
             </div>
@@ -119,21 +119,21 @@ export const FeaturedAuction: React.FC<FeaturedAuctionProps> = ({ ledgerState, o
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             
             {/* Current Verified Reserve / Highest Disclosed */}
-            <div className="p-4 rounded-2xl bg-midnight-900/80 border border-gold-500/20 flex flex-col justify-between">
+            <div className="p-4 rounded-2xl bg-obsidian-950/80 border border-white/10 flex flex-col justify-between">
               <div className="flex items-center justify-between text-xs text-slate-400 mb-1">
                 <span>
                   {ledgerState.auctionState === AuctionState.RevealActive || ledgerState.auctionState === AuctionState.Finalized
                     ? "Highest Verified Bid"
                     : "Initial Reserve Floor"}
                 </span>
-                <ShieldCheck className="w-4 h-4 text-gold-400" />
+                <ShieldCheck className="w-4 h-4 text-celestial-400" />
               </div>
-              <div className="text-2xl font-bold font-mono text-gold-400 flex items-baseline gap-2">
+              <div className="text-2xl font-bold font-mono text-white flex items-baseline gap-2">
                 <span>{(Number(ledgerState.highestBid) / 1_000_000).toLocaleString()}</span>
-                <span className="text-xs text-gold-200/70 font-sans">tDUST</span>
+                <span className="text-xs text-celestial-400 font-sans">tDUST</span>
               </div>
               <p className="text-[11px] text-slate-400 mt-2 flex items-center gap-1">
-                <EyeOff className="w-3 h-3 text-gold-400" />
+                <EyeOff className="w-3 h-3 text-celestial-400" />
                 {ledgerState.auctionState === AuctionState.BiddingActive 
                   ? "Active bids hidden via private witnesses"
                   : "Cryptographically verified on Midnight"}
@@ -141,22 +141,22 @@ export const FeaturedAuction: React.FC<FeaturedAuctionProps> = ({ ledgerState, o
             </div>
 
             {/* Countdown Timer */}
-            <div className="p-4 rounded-2xl bg-midnight-900/80 border border-gold-500/20 flex flex-col justify-between">
+            <div className="p-4 rounded-2xl bg-obsidian-950/80 border border-white/10 flex flex-col justify-between">
               <div className="flex items-center justify-between text-xs text-slate-400 mb-1">
                 <span>Phase Remaining Time</span>
-                <Timer className="w-4 h-4 text-cyber-cyan" />
+                <Timer className="w-4 h-4 text-celestial-400" />
               </div>
               <div className="grid grid-cols-3 gap-2 text-center" suppressHydrationWarning>
-                <div className="p-1.5 rounded-lg bg-midnight-950 border border-gold-500/20">
+                <div className="p-1.5 rounded-lg bg-obsidian-900 border border-white/10">
                   <div className="text-lg font-bold font-mono text-white" suppressHydrationWarning>{String(timeLeft.hours).padStart(2, '0')}</div>
                   <div className="text-[9px] uppercase tracking-wider text-slate-400">Hours</div>
                 </div>
-                <div className="p-1.5 rounded-lg bg-midnight-950 border border-gold-500/20">
+                <div className="p-1.5 rounded-lg bg-obsidian-900 border border-white/10">
                   <div className="text-lg font-bold font-mono text-white" suppressHydrationWarning>{String(timeLeft.minutes).padStart(2, '0')}</div>
                   <div className="text-[9px] uppercase tracking-wider text-slate-400">Mins</div>
                 </div>
-                <div className="p-1.5 rounded-lg bg-midnight-950 border border-gold-500/20">
-                  <div className="text-lg font-bold font-mono text-gold-400" suppressHydrationWarning>{String(timeLeft.seconds).padStart(2, '0')}</div>
+                <div className="p-1.5 rounded-lg bg-obsidian-900 border border-white/10">
+                  <div className="text-lg font-bold font-mono text-celestial-300" suppressHydrationWarning>{String(timeLeft.seconds).padStart(2, '0')}</div>
                   <div className="text-[9px] uppercase tracking-wider text-slate-400">Secs</div>
                 </div>
               </div>
@@ -173,7 +173,7 @@ export const FeaturedAuction: React.FC<FeaturedAuctionProps> = ({ ledgerState, o
               <span>Simulation Mode Toggle:</span>
               <button
                 onClick={onPhaseChange}
-                className="px-3 py-1.5 rounded-lg bg-midnight-800 hover:bg-midnight-700 text-gold-400 border border-gold-500/30 transition-colors"
+                className="px-3 py-1.5 rounded-lg bg-obsidian-900 hover:bg-obsidian-800 text-celestial-300 border border-celestial-500/30 transition-colors"
               >
                 {ledgerState.auctionState === AuctionState.BiddingActive
                   ? "Advance to Reveal Phase ➔"
@@ -189,3 +189,4 @@ export const FeaturedAuction: React.FC<FeaturedAuctionProps> = ({ ledgerState, o
     </div>
   );
 };
+

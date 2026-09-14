@@ -57,13 +57,13 @@ export const LiveActivityStream: React.FC<LiveActivityStreamProps> = ({ events }
   };
 
   return (
-    <div className="glass-panel rounded-3xl p-6 sm:p-8 border border-gold-500/30">
+    <div className="glass-card-obsidian rounded-3xl p-6 sm:p-8">
       
       {/* Header */}
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center gap-3">
           <div className="relative flex items-center justify-center">
-            <Radio className="w-5 h-5 text-gold-400 animate-pulse" />
+            <Radio className="w-5 h-5 text-celestial-400 animate-pulse" />
             <span className="absolute -top-1 -right-1 w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
           </div>
           <div>
@@ -72,7 +72,7 @@ export const LiveActivityStream: React.FC<LiveActivityStreamProps> = ({ events }
           </div>
         </div>
 
-        <span className="text-xs font-mono text-slate-400 bg-midnight-900 px-3 py-1 rounded-full border border-slate-700">
+        <span className="text-xs font-mono text-slate-400 bg-obsidian-950 px-3 py-1 rounded-full border border-white/10">
           Sync: Realtime Blockstream
         </span>
       </div>
@@ -82,12 +82,12 @@ export const LiveActivityStream: React.FC<LiveActivityStreamProps> = ({ events }
         {events.map((evt) => (
           <div
             key={evt.id}
-            className="p-4 rounded-2xl bg-midnight-900/60 hover:bg-midnight-900/90 border border-slate-800/80 hover:border-gold-500/30 transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-3"
+            className="p-4 rounded-2xl bg-obsidian-950/70 hover:bg-obsidian-900 border border-white/5 hover:border-celestial-500/30 transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-3"
           >
             <div className="space-y-1.5 flex-1 min-w-0">
               <div className="flex flex-wrap items-center gap-2">
                 {getEventBadge(evt.type)}
-                <span className="text-xs text-slate-400">
+                <span className="text-xs text-slate-400 font-mono">
                   Block #{evt.blockHeight}
                 </span>
                 <span className="text-slate-600 text-xs">•</span>
@@ -99,7 +99,7 @@ export const LiveActivityStream: React.FC<LiveActivityStreamProps> = ({ events }
               {evt.commitmentHash && (
                 <div className="flex items-center gap-2 text-xs">
                   <span className="text-slate-400">Commitment:</span>
-                  <code className="font-mono text-[11px] text-gold-300 bg-midnight-950 px-2 py-0.5 rounded truncate max-w-[280px]">
+                  <code className="font-mono text-[11px] text-celestial-300 bg-obsidian-900 px-2 py-0.5 rounded truncate max-w-[280px]">
                     {evt.commitmentHash}
                   </code>
                 </div>
@@ -118,10 +118,10 @@ export const LiveActivityStream: React.FC<LiveActivityStreamProps> = ({ events }
             {/* Transaction Link */}
             <div className="flex items-center gap-3">
               <a
-                href={`https://explorer.preprod.midnight.network/tx/${evt.txHash}`}
+                href={`https://preprod.midnight.network/contract/7917d54030a7b550eff2d7c96e7943a39559432c3c15867d6b40eb52e43406d0`}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center gap-1.5 text-xs font-mono text-cyan-400 hover:text-cyan-300 hover:underline bg-midnight-950 px-3 py-1.5 rounded-xl border border-cyan-500/20"
+                className="inline-flex items-center gap-1.5 text-xs font-mono text-celestial-400 hover:text-celestial-300 hover:underline bg-obsidian-900 px-3 py-1.5 rounded-xl border border-celestial-500/20"
               >
                 <span>{evt.txHash.slice(0, 8)}...{evt.txHash.slice(-6)}</span>
                 <ExternalLink className="w-3 h-3" />
