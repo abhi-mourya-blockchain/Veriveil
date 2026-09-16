@@ -8,7 +8,8 @@
 [![License: Apache 2.0](https://img.shields.io/badge/License-Apache%202.0-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/Apache-2.0)
 
 **AetherBid** is a decentralized, confidential sealed-bid auction protocol natively engineered for the **Midnight Network**. Leveraging Midnight's **Compact** smart contract language and zero-knowledge proving architecture, AetherBid enables high-value, tamper-proof auctions where bid values remain 100% confidential during the bidding window, and non-winning bids are never exposed on-chain.
-** Twitter Handle ** :[Twitter Handle of Product](https://x.com/veriVeil)
+
+**Twitter Handle** :[Twitter Handle of Product](https://x.com/veriVeil)
 🌐 **Live Deployed dApp:** [https://veriveil.vercel.app/](https://veriveil.vercel.app/)  
 🎬 **Live Demo Video Walkthrough:** [https://photos.app.goo.gl/s1RRNzngZfZaw3qy9](https://photos.app.goo.gl/s1RRNzngZfZaw3qy9)
 
@@ -241,7 +242,7 @@ Licensed under the Apache License, Version 2.0.
 ---
 
 ## 👨‍💻 Author & Repository
-
+- **Twitter Handle** :[Twitter Handle of Product](https://x.com/veriVeil)
 - **Developer:** [abhi-mourya-blockchain](https://github.com/abhi-mourya-blockchain)
 - **Repository:** [https://github.com/abhi-mourya-blockchain/Veriveil](https://github.com/abhi-mourya-blockchain/Veriveil)
 - **Ecosystem:** Midnight Network (IOG / Cardano ZK Protocol)
