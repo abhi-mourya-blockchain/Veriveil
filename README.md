@@ -22,7 +22,7 @@
 | **Network** | Midnight Preprod |
 | **Contract Name** | `AetherBid` |
 | **Contract ID / Address** | [`7917d54030a7b550eff2d7c96e7943a39559432c3c15867d6b40eb52e43406d0`](https://preprod.midnight.network/contract/7917d54030a7b550eff2d7c96e7943a39559432c3c15867d6b40eb52e43406d0) |
-| **Midnight Explorer URL** | [https://preprod.midnightexplorer.com/transactions/0x3f97fbc62f3605edda5d7ea66fc2b906e5e89d4525eb23ac25e1f5fa6c31b487](https://preprod.midnightexplorer.com/transactions/0x3f97fbc62f3605edda5d7ea66fc2b906e5e89d4525eb23ac25e1f5fa6c31b487) |
+| **Midnight Explorer URL** | [https://preprod.midnightexplorer.com/contracts/0x7917d54030a7b550eff2d7c96e7943a39559432c3c15867d6b40eb52e43406d0](https://preprod.midnightexplorer.com/contracts/0x7917d54030a7b550eff2d7c96e7943a39559432c3c15867d6b40eb52e43406d0) |
 | **DUST Registration Tx** | `00911d2d0f8199a8d1e83c2ec51179f33683bab2474446a78d728a67cd4354d9f1` |
 | **Circuit Verifier Key Hash** | `0x7a39b81e4c02f891a0c8b2e1f4a9d7c0b3e6f9a2c5b8e1f4a7c0b2e6f9a3c7b1` |
 | **Compiler Standard** | Compact v0.31.1 (Level-3 & Level-4 Ready) |
